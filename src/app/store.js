@@ -6,11 +6,13 @@ import storage from 'redux-persist/lib/storage';
 import themeReducer from '../features/theme/themeSlice';
 import sysReducer from '../features/sys/sysSlice';
 import weatherReducer from '../features/weather/weatherSlice';
+import searchReducer from '../features/search/searchSlice';
 
 const reducers = combineReducers({
   theme: themeReducer,
   sys: sysReducer,
   weather: weatherReducer,
+  search: searchReducer,
 });
 
 const persistConfig = {

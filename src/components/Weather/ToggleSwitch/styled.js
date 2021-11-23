@@ -6,7 +6,7 @@ export const Switch = styled.label`
   width: 50px;
   height: 20px;
   cursor: pointer;
-  top: 0;
+  top: 5px;
   left: 0;
   right: 0;
   bottom: 0;

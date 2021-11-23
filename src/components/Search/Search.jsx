@@ -1,19 +1,24 @@
-// components/Search.js
 import React, { useEffect, useState } from 'react';
+import { useSelector, useDispatch } from 'react-redux';
 import { DebounceInput } from 'react-debounce-input';
 import {
-  LocationButton,
+  Button,
   LocationIcon,
+  GoogleIcon,
+  WeatherSearchIcon,
   SearchElement,
-  SearchIcon,
   SearchInput,
 } from './styled';
+
+import { setSearchMode, GOOGLE, WEATHER } from '../../features/search/searchSlice';
 
 import useFetch from '../../hooks/useFetch';
 
 const Search = () => {
+  const dispatch = useDispatch();
+  const searchMode = useSelector((state) => state.search.searchMode);
   const { fetchWeatherData, fetchLocationWeatherData } = useFetch();
-  const [city, setCity] = useState('');
+  const [query, setQuery] = useState('');
   const [location, setLocation] = useState(null);
 
   useEffect(() => {
@@ -25,21 +30,36 @@ const Search = () => {
   // Enter key case
   const onKeyDown = (event) => {
     if (event.keyCode === 13) {
-      fetchWeatherData(city);
+      if (searchMode === WEATHER) {
+        fetchWeatherData(query);
+      }
+      if (searchMode === GOOGLE) {
+        console.log('google search');
+        window.open(`https://www.google.com/search?q=${query}`, '_blank');
+      }
     }
   };
 
   return (
     <SearchElement>
-      <SearchIcon />
+      <Button onClick={() => {
+        if (searchMode === GOOGLE) {
+          dispatch(setSearchMode(WEATHER));
+        } else {
+          dispatch(setSearchMode(GOOGLE));
+        }
+      }}
+      >
+        {searchMode === GOOGLE ? <GoogleIcon /> : <WeatherSearchIcon />}
+      </Button>
       <DebounceInput
         element={SearchInput}
         debounceTimeout={0}
-        onChange={(event) => setCity(event.target.value)}
+        onChange={(event) => setQuery(event.target.value)}
         onKeyDown={onKeyDown}
         placeholder="Search"
       />
-      <LocationButton
+      <Button
         onClick={() => {
           if (navigator.geolocation) {
             navigator.geolocation.getCurrentPosition((position) => {
@@ -54,7 +74,7 @@ const Search = () => {
         }}
       >
         <LocationIcon />
-      </LocationButton>
+      </Button>
     </SearchElement>
   );
 };

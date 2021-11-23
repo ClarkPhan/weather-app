@@ -1,8 +1,7 @@
 import styled from 'styled-components';
 
 export const WeatherContainer = styled.div`
-  background-color: ${({ theme }) => theme.panelBgColor};
-  box-shadow: 1px 1px 3px rgba(0, 0, 0, 0.1);
+  background-color: transparent;
   border-radius: 15px;
   padding: 1.5rem 2rem;
   display: flex;
@@ -13,6 +12,12 @@ export const SectionTitle = styled.h6`
   font-weight: 500;
   font-size: 1.125rem;
   color: ${({ theme }) => theme.panelTitleColor};
+`;
+
+export const LastUpdatedSection = styled.h6`
+  font-weight: 500;
+  font-size: 1.125rem;
+  color: ${({ theme }) => theme.lastUpdatedTextColor};
 `;
 
 export const CurrentWeatherContainer = styled.div`
@@ -26,21 +31,21 @@ export const CurrentWeatherContainer = styled.div`
 export const CurrentWeather = styled.div`
   display: flex;
   flex-direction: column;
-  margin: 2rem 1.5rem;
+  margin: 2rem 5rem;
   width: 25rem;
   @media (max-width: 800px) {
     margin: 2rem 0rem;
   }
   h4 {
     font-weight: 600;
-    font-size: 1.25rem;
-    color: #396bae;
+    font-size: 1.5rem;
+    color: ${({ theme }) => theme.panelTitleColor};
     margin-bottom: 2rem;
   }
   span {
     font-weight: 200;
     font-size: 6rem;
-    color: #4a6fa1;
+    color: ${({ theme }) => theme.panelTitleColor};
     margin-left: 1.5rem;
     line-height: 1;
     sup {
@@ -56,9 +61,9 @@ export const CurrentWeatherInfo = styled.div`
   margin-left: 2rem;
 `;
 
-export const FeelsLike = styled.p`
-  font-size: 1.25rem;
-  color: #4a6fa1;
+export const WeatherDescription = styled.p`
+  font-size: 1.5rem;
+  color: ${({ theme }) => theme.panelTitleColor};
 `;
 
 export const HighLowContainer = styled.div`
@@ -71,8 +76,8 @@ export const WeatherDegree = styled.div`
   display: flex;
   align-items: center;
   font-weight: 500;
-  font-size: 1.25rem;
-  color: #3a86ca;
+  font-size: 2.25rem;
+  color: ${({ theme }) => theme.panelTitleColor};
   margin-top: 0.8rem;
   margin-right: 2.5rem;
   svg {
@@ -100,7 +105,7 @@ export const InfoRow = styled.div`
     margin-left: -0.3rem;
   }
   span {
-    color: #3080c8;
+    color: ${({ theme }) => theme.panelTitleColor};
     font-weight: 500;
     font-size: 1rem;
   }

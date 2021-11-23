@@ -5,7 +5,6 @@ import { ReactComponent as HighIcon } from '../../assets/high-icon.svg';
 import { ReactComponent as LowIcon } from '../../assets/low-icon.svg';
 
 import { ReactComponent as HumidityIcon } from '../../assets/humidity-icon.svg';
-import { ReactComponent as PressureIcon } from '../../assets/pressure-icon.svg';
 import { ReactComponent as WindIcon } from '../../assets/wind-icon.svg';
 
 import { toggleTemperatureScale } from '../../features/sys/sysSlice';
@@ -18,10 +17,10 @@ import {
   CurrentWeather,
   CurrentWeatherContainer,
   CurrentWeatherInfo,
-  FeelsLike,
+  WeatherDescription,
   HighLowContainer,
   InfoRow,
-  SectionTitle,
+  LastUpdatedSection,
   WeatherContainer,
   WeatherDegree,
 } from './styled';
@@ -32,17 +31,17 @@ import Refresh from './Refresh/Refresh';
 
 const Weather = () => {
   const {
-    weather,
+    weatherData,
     useFahrenheit,
     initialLoad,
     lastUpdated,
     error,
-  } = useSelector((store) => ({
-    weather: store.weather.weatherData,
-    useFahrenheit: store.sys.useFahrenheit,
-    initialLoad: store.sys.initialLoad,
-    error: store.weather.error,
-    lastUpdated: store.weather.lastUpdated,
+  } = useSelector((state) => ({
+    weatherData: state.weather.weatherData,
+    useFahrenheit: state.sys.useFahrenheit,
+    initialLoad: state.sys.initialLoad,
+    error: state.weather.error,
+    lastUpdated: state.weather.lastUpdated,
   }));
   const dispatch = useDispatch();
 
@@ -53,47 +52,43 @@ const Weather = () => {
   }, [error]);
 
   if (!initialLoad) return null;
-
+  const {
+    weather,
+    main,
+    wind,
+    name,
+  } = weatherData;
+  const { id, description } = weather[0];
+  const {
+    temp,
+    temp_max: tempMax,
+    temp_min: tempMin,
+    humidity,
+  } = main;
   return (
     <WeatherContainer>
-      <div style={{ display: 'flex', justifyContent: 'space-between' }}>
-        <SectionTitle>
-          Current Weather
-        </SectionTitle>
-        <div>
-          <Refresh />
-        </div>
-      </div>
-
       <CurrentWeatherContainer>
         <CurrentWeather>
-          <h4>{weather.name}</h4>
+          <WeatherDescription>{name}</WeatherDescription>
           <div style={{ display: 'flex' }}>
-            <WeatherIconSwitcher code={weather.weather.id} big />
+            <WeatherIconSwitcher code={id} big />
             <span>
-              <Temperature value={weather.main.temp} />
+              <Temperature value={temp} />
               <sup>&deg;</sup>
             </span>
           </div>
-          <h6>{weather.weather.description}</h6>
         </CurrentWeather>
-
         <CurrentWeatherInfo>
-          <FeelsLike>
-            Feels like
-            {' '}
-            <Temperature value={weather.main.feels_like} />
-            <sup>&deg;</sup>
-          </FeelsLike>
+          <WeatherDescription>{description}</WeatherDescription>
           <HighLowContainer>
             <WeatherDegree>
               <HighIcon />
-              <Temperature value={weather.main.temp_max} />
+              <Temperature value={tempMax} />
               <sup>&deg;</sup>
             </WeatherDegree>
             <WeatherDegree>
               <LowIcon />
-              <Temperature value={weather.main.temp_min} />
+              <Temperature value={tempMin} />
               <sup>&deg;</sup>
             </WeatherDegree>
           </HighLowContainer>
@@ -104,7 +99,7 @@ const Weather = () => {
               Humidity
             </div>
             <span>
-              {weather.main.humidity}
+              {humidity}
               %
             </span>
           </InfoRow>
@@ -115,19 +110,9 @@ const Weather = () => {
               Wind
             </div>
             <span>
-              {!useFahrenheit ? weather.wind.speed : kmToMile(weather.wind.speed)}
-              {!useFahrenheit ? 'kph' : 'mph'}
-            </span>
-          </InfoRow>
-          <InfoRow>
-            <div>
-              <PressureIcon />
+              {!useFahrenheit ? wind.speed : kmToMile(wind.speed)}
               {' '}
-              Pressure
-            </div>
-            <span>
-              {weather.main.pressure}
-              hPa
+              {!useFahrenheit ? 'kph' : 'mph'}
             </span>
           </InfoRow>
         </CurrentWeatherInfo>
@@ -136,11 +121,12 @@ const Weather = () => {
         <div>
           <ToggleSwitch onClick={() => dispatch(toggleTemperatureScale())} />
         </div>
-        <SectionTitle>
+        <LastUpdatedSection>
           Last Updated:
           {' '}
           {lastUpdated}
-        </SectionTitle>
+        </LastUpdatedSection>
+        <Refresh />
       </div>
 
     </WeatherContainer>

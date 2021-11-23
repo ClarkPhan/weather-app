@@ -12,8 +12,8 @@ const ToggleSwitch = (props) => {
         onClick();
       }}
     >
-      {toggled && <span className="on">C</span>}
-      {!toggled && <span className="off">F</span>}
+      {toggled && <span className="on"><strong>C</strong></span>}
+      {!toggled && <span className="off"><strong>F</strong></span>}
       <Slider style={{ transform: toggled ? ' translateX(28px)' : ' translateX(0px)' }} />
     </Switch>
   );

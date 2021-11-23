@@ -13,14 +13,20 @@ const rotate = keyframes`
   }
 `;
 
+export const RefreshElement = styled.div`
+  display: flex;
+  justify-content: right;
+`;
+
 export const RefreshButton = styled.button`
-border: none;
-background-color: transparent;
+  border: none;
+  background-color: transparent;
+
 `;
 
 export const RefreshIcon = styled(Refresh)`
-height: 24px;
-width: 24px;
-fill: #4a6fa1;
-animation: ${(props) => (props.isLoading ? css`${rotate} .5s linear infinite;` : null)}
+  height: 30px;
+  width: 30px;
+  fill: ${({ theme }) => theme.smallIconColor};
+  animation: ${(props) => (props.isLoading ? css`${rotate} .5s linear infinite;` : null)}
 `;

@@ -8,9 +8,7 @@ export const weatherSlice = createSlice({
     city: null,
     weatherData: {
       main: {
-        feels_like: 0,
         humidity: 0,
-        pressure: 0,
         temp: 0,
         temp_max: 0,
         temp_min: 0,
@@ -41,7 +39,7 @@ export const weatherSlice = createSlice({
     },
     setWeatherData: (state, action) => {
       state.weatherData = action.payload;
-      state.lastUpdated = date.format(new Date(), 'ddd, MMM h:mm:ss A');
+      state.lastUpdated = date.format(new Date(), 'dddd MMMM DD, h:mm:ss A');
     },
   },
 });

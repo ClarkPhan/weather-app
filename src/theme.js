@@ -2,7 +2,7 @@ import lightBg from './assets/lightBg.svg';
 import darkBg from './assets/darkBg.svg';
 
 export const lightTheme = {
-  appTitleColor: '#2F5D8A',
+  titleColor: '#2F5D8A',
   backgroundImage: lightBg,
   backgroundGradient: {
     color1: '#F9FFFF',
@@ -20,39 +20,34 @@ export const lightTheme = {
     sliderColor: '#fff',
     textColor: '#fff',
   },
-  searchSuggestion: {
-    backgroundColor: '#fff',
-    hoverBackgroundColor: '#f9f9f9',
-    seperatorLineColor: '#ccc',
-  },
   smallIconColor: '#A1B9CE',
   smallIconTextColor: '#7B98B2',
+  lastUpdatedTextColor: '#2F5D8A',
 };
 
 export const darkTheme = {
-  appTitleColor: '#2F5D8A',
+  titleColor: 'white',
   backgroundImage: darkBg,
   backgroundGradient: {
-    color1: '#031027',
+    color1: '#788487',
     color2: '#02101D',
   },
-  panelBgColor: '#051A33',
-  panelTitleColor: '#216397',
+  panelBgColor: '#212121',
+  panelTitleColor: 'white',
   forecastPanelBgColor: 'rgba(5, 26, 51, 0.75)',
   searchInput: {
-    color: '#5f8bbf',
-    placeholderColor: '#235A84',
+    color: '#c2c2c2',
+    placeholderColor: 'white',
   },
   temperatureSwitch: {
-    backgroundColor: '#1b3657',
-    sliderColor: '#437abd',
-    textColor: '#718cac',
+    backgroundColor: '#c2c2c2',
+    sliderColor: '#212121',
+    textColor: '#212121',
   },
-  searchSuggestion: {
-    backgroundColor: '#0f2744',
-    hoverBackgroundColor: '#183553',
-    seperatorLineColor: '#356097',
+  smallIconColor: '#c2c2c2',
+  smallIconTextColor: 'white',
+  lastUpdatedTextColor: '#c2c2c2',
+  footer: {
+    textColor: '#c2c2c2',
   },
-  smallIconColor: '#153C5E',
-  smallIconTextColor: '#3975AB',
 };

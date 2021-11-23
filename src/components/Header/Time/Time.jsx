@@ -18,7 +18,7 @@ const Time = () => {
 
   useEffect(() => {
     const topOfTheHour = now.split(':');
-    if (topOfTheHour[1] === '00') {
+    if (topOfTheHour[1] === '00' && topOfTheHour[2] === '00') {
       refreshWeatherData();
     }
   }, [now]);
