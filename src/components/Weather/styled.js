@@ -1,7 +1,6 @@
 import styled from 'styled-components';
 
 export const WeatherContainer = styled.div`
-  background-color: transparent;
   border-radius: 15px;
   padding: 1.5rem 2rem;
   display: flex;
@@ -76,7 +75,7 @@ export const WeatherDegree = styled.div`
   display: flex;
   align-items: center;
   font-weight: 500;
-  font-size: 2.25rem;
+  font-size: 2rem;
   color: ${({ theme }) => theme.panelTitleColor};
   margin-top: 0.8rem;
   margin-right: 2.5rem;

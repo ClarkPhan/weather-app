@@ -1,5 +1,5 @@
 import lightBg from './assets/lightBg.svg';
-import darkBg from './assets/darkBg.svg';
+import bg from './assets/background.jpg';
 
 export const lightTheme = {
   titleColor: '#2F5D8A',
@@ -27,7 +27,7 @@ export const lightTheme = {
 
 export const darkTheme = {
   titleColor: 'white',
-  backgroundImage: darkBg,
+  backgroundImage: bg,
   backgroundGradient: {
     color1: '#788487',
     color2: '#02101D',
@@ -40,14 +40,14 @@ export const darkTheme = {
     placeholderColor: 'white',
   },
   temperatureSwitch: {
-    backgroundColor: '#c2c2c2',
+    backgroundColor: 'white',
     sliderColor: '#212121',
     textColor: '#212121',
   },
   smallIconColor: '#c2c2c2',
   smallIconTextColor: 'white',
-  lastUpdatedTextColor: '#c2c2c2',
+  lastUpdatedTextColor: 'white',
   footer: {
-    textColor: '#c2c2c2',
+    textColor: 'white',
   },
 };
