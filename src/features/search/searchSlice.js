@@ -6,7 +6,7 @@ export const WEATHER = 'Weather';
 export const searchSlice = createSlice({
   name: 'search',
   initialState: {
-    searchMode: WEATHER,
+    searchMode: GOOGLE,
   },
   reducers: {
     setSearchMode: (state, action) => {

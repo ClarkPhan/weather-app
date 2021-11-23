@@ -39,7 +39,7 @@ export const weatherSlice = createSlice({
     },
     setWeatherData: (state, action) => {
       state.weatherData = action.payload;
-      state.lastUpdated = date.format(new Date(), 'dddd MMMM DD, h:mm:ss A');
+      state.lastUpdated = date.format(new Date(), 'dddd, MMMM DD at h:mm:ss A');
     },
   },
 });

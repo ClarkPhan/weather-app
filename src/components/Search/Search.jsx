@@ -32,9 +32,9 @@ const Search = () => {
     if (event.keyCode === 13) {
       if (searchMode === WEATHER) {
         fetchWeatherData(query);
+        setQuery('');
       }
       if (searchMode === GOOGLE) {
-        console.log('google search');
         window.open(`https://www.google.com/search?q=${query}`, '_blank');
       }
     }

@@ -17,8 +17,10 @@ const Time = () => {
   });
 
   useEffect(() => {
-    const topOfTheHour = now.split(':');
-    if (topOfTheHour[1] === '00' && topOfTheHour[2] === '00') {
+    const moment = now.split(':');
+    const minutes = parseInt(moment[1], 10);
+    const seconds = moment[2].split(' ')[0];
+    if (minutes % 5 === 0 && seconds === '00') {
       refreshWeatherData();
     }
   }, [now]);
