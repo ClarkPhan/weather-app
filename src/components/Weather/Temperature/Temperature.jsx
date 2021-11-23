@@ -5,9 +5,7 @@ import { celciusToFahrenheit } from '../../../utils/unitConversion';
 
 const Temperature = (props) => {
   const { value } = props;
-  const { useFahrenheit } = useSelector((state) => ({
-    degreeType: state.sys.useFahrenheit,
-  }));
+  const useFahrenheit = useSelector((state) => (state.sys.useFahrenheit));
 
   if (useFahrenheit) {
     return <>{celciusToFahrenheit(value)}</>;

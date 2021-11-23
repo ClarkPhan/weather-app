@@ -1,11 +1,12 @@
 import { createSlice } from '@reduxjs/toolkit';
+import date from 'date-and-time';
 
 export const sysSlice = createSlice({
   name: 'sys',
   initialState: {
     isLoading: false,
     initialLoad: false,
-    now: new Date(),
+    now: date.format(new Date(), 'h:mm:ss A'),
     useFahrenheit: true,
     error: null,
   },
@@ -18,7 +19,7 @@ export const sysSlice = createSlice({
       state.isLoading = action.payload;
     },
     tick: (state) => {
-      state.now = new Date();
+      state.now = date.format(new Date(), 'h:mm:ss A');
     },
     toggleTemperatureScale: (state) => {
       state.useFahrenheit = !state.useFahrenheit;

@@ -1,6 +1,6 @@
 // hooks/useFetch.js
 import { useState, useEffect } from 'react';
-import { useDispatch } from 'react-redux';
+import { useDispatch, batch } from 'react-redux';
 
 import { setWeatherData } from '../features/weather/weatherSlice';
 import { setIsLoading, setError, setInitialLoad } from '../features/sys/sysSlice';
@@ -12,8 +12,10 @@ const useFetch = () => {
 
   const fetchWeatherData = (query) => {
     if (!query) return;
-    dispatch(setIsLoading(true));
-    dispatch(setError(null));
+    batch(() => {
+      dispatch(setIsLoading(true));
+      dispatch(setError(null));
+    });
     fetch(query)
       .then((response) => response.json())
       .then((res) => {
@@ -23,12 +25,16 @@ const useFetch = () => {
           return;
         }
         console.log(res);
-        dispatch(setInitialLoad(true));
-        dispatch(setWeatherData(res));
+        batch(() => {
+          dispatch(setInitialLoad(true));
+          dispatch(setWeatherData(res));
+        });
       })
       .catch((err) => {
-        dispatch((setIsLoading(false)));
-        dispatch((setError(err)));
+        batch(() => {
+          dispatch((setIsLoading(false)));
+          dispatch((setError(err)));
+        });
       });
   };
 

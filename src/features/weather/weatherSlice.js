@@ -3,6 +3,7 @@ import { createSlice } from '@reduxjs/toolkit';
 export const weatherSlice = createSlice({
   name: 'weather',
   initialState: {
+    city: null,
     weatherData: {
       main: {
         feels_like: 0,
@@ -33,12 +34,15 @@ export const weatherSlice = createSlice({
     isError: false,
   },
   reducers: {
+    setCity: (state, action) => {
+      state.city = action.payload;
+    },
     setWeatherData: (state, action) => {
       state.weatherData = action.payload;
     },
   },
 });
 
-export const { setWeatherData } = weatherSlice.actions;
+export const { setCity, setWeatherData } = weatherSlice.actions;
 
 export default weatherSlice.reducer;

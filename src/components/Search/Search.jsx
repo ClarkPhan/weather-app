@@ -14,14 +14,14 @@ import {
 import useFetch from '../../hooks/useFetch';
 
 const Search = () => {
-  const [city, setCity] = useState('');
-  const [location, setLocation] = useState(null);
   const { fetchWeatherData } = useFetch();
-
   const isLoading = useSelector((state) => (state.sys.isLoading));
 
-  const query = `${process.env.REACT_APP_API_URL}/weather?q=${city}&appid=${process.env.REACT_APP_API_KEY}`;
-  const locationQuery = `${process.env.REACT_APP_API_URL}/weather?lat=${location?.lat}&lon=${location?.long}&appid=${process.env.REACT_APP_API_KEY}`;
+  const [city, setCity] = useState('');
+  const [location, setLocation] = useState(null);
+
+  const query = `${process.env.REACT_APP_API_URL}/weather?q=${city}&appid=${process.env.REACT_APP_API_KEY}&units=metric`;
+  const locationQuery = `${process.env.REACT_APP_API_URL}/weather?lat=${location?.lat}&lon=${location?.long}&appid=${process.env.REACT_APP_API_KEY}&units=metric`;
 
   useEffect(() => {
     if (location) {
@@ -44,7 +44,7 @@ const Search = () => {
         debounceTimeout={0}
         onChange={(event) => setCity(event.target.value)}
         onKeyDown={onKeyDown}
-        placeholder="Search for location"
+        placeholder="Search"
       />
       {isLoading && <Spinner animation="grow" />}
       <LocationButton

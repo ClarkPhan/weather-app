@@ -6,10 +6,6 @@ export const HeaderContainer = styled.header`
   align-items: center;
   height: 8rem;
 `;
-export const Title = styled.h1`
-  color: ${({ theme }) => theme.appTitleColor};
-  font-size: 2.2rem;
-`;
 
 export const GithubLink = styled.a`
   margin-left: 1rem;
