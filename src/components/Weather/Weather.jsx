@@ -28,18 +28,21 @@ import {
 
 import Temperature from './Temperature/Temperature';
 import ToggleSwitch from './ToggleSwitch/ToggleSwitch';
+import Refresh from './Refresh/Refresh';
 
 const Weather = () => {
   const {
     weather,
     useFahrenheit,
     initialLoad,
+    lastUpdated,
     error,
   } = useSelector((store) => ({
     weather: store.weather.weatherData,
     useFahrenheit: store.sys.useFahrenheit,
     initialLoad: store.sys.initialLoad,
     error: store.weather.error,
+    lastUpdated: store.weather.lastUpdated,
   }));
   const dispatch = useDispatch();
 
@@ -54,11 +57,14 @@ const Weather = () => {
   return (
     <WeatherContainer>
       <div style={{ display: 'flex', justifyContent: 'space-between' }}>
-        <SectionTitle>Current Weather</SectionTitle>
+        <SectionTitle>
+          Current Weather
+        </SectionTitle>
         <div>
-          <ToggleSwitch onClick={() => dispatch(toggleTemperatureScale())} />
+          <Refresh />
         </div>
       </div>
+
       <CurrentWeatherContainer>
         <CurrentWeather>
           <h4>{weather.name}</h4>
@@ -126,6 +132,17 @@ const Weather = () => {
           </InfoRow>
         </CurrentWeatherInfo>
       </CurrentWeatherContainer>
+      <div style={{ display: 'flex', justifyContent: 'space-between' }}>
+        <div>
+          <ToggleSwitch onClick={() => dispatch(toggleTemperatureScale())} />
+        </div>
+        <SectionTitle>
+          Last Updated:
+          {' '}
+          {lastUpdated}
+        </SectionTitle>
+      </div>
+
     </WeatherContainer>
   );
 };

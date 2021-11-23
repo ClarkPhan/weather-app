@@ -1,8 +1,10 @@
 import { createSlice } from '@reduxjs/toolkit';
+import date from 'date-and-time';
 
 export const weatherSlice = createSlice({
   name: 'weather',
   initialState: {
+    lastUpdated: null,
     city: null,
     weatherData: {
       main: {
@@ -39,6 +41,7 @@ export const weatherSlice = createSlice({
     },
     setWeatherData: (state, action) => {
       state.weatherData = action.payload;
+      state.lastUpdated = date.format(new Date(), 'ddd, MMM h:mm:ss A');
     },
   },
 });

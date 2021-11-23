@@ -1,16 +1,17 @@
-/* eslint-disable react/prop-types */
-import React from 'react';
 import { useSelector } from 'react-redux';
+import PropTypes from 'prop-types';
 import { celciusToFahrenheit } from '../../../utils/unitConversion';
 
-const Temperature = (props) => {
-  const { value } = props;
+const Temperature = ({ value }) => {
   const useFahrenheit = useSelector((state) => (state.sys.useFahrenheit));
-
   if (useFahrenheit) {
-    return <>{celciusToFahrenheit(value)}</>;
+    return celciusToFahrenheit(value);
   }
   return value;
+};
+
+Temperature.propTypes = {
+  value: PropTypes.number.isRequired,
 };
 
 export default Temperature;

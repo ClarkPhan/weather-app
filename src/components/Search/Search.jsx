@@ -1,7 +1,5 @@
 // components/Search.js
 import React, { useEffect, useState } from 'react';
-import { useSelector } from 'react-redux';
-import { Spinner } from 'react-bootstrap';
 import { DebounceInput } from 'react-debounce-input';
 import {
   LocationButton,
@@ -14,25 +12,20 @@ import {
 import useFetch from '../../hooks/useFetch';
 
 const Search = () => {
-  const { fetchWeatherData } = useFetch();
-  const isLoading = useSelector((state) => (state.sys.isLoading));
-
+  const { fetchWeatherData, fetchLocationWeatherData } = useFetch();
   const [city, setCity] = useState('');
   const [location, setLocation] = useState(null);
 
-  const query = `${process.env.REACT_APP_API_URL}/weather?q=${city}&appid=${process.env.REACT_APP_API_KEY}&units=metric`;
-  const locationQuery = `${process.env.REACT_APP_API_URL}/weather?lat=${location?.lat}&lon=${location?.long}&appid=${process.env.REACT_APP_API_KEY}&units=metric`;
-
   useEffect(() => {
     if (location) {
-      fetchWeatherData(locationQuery);
+      fetchLocationWeatherData(location);
     }
   }, [location]);
 
   // Enter key case
   const onKeyDown = (event) => {
     if (event.keyCode === 13) {
-      fetchWeatherData(query);
+      fetchWeatherData(city);
     }
   };
 
@@ -46,7 +39,6 @@ const Search = () => {
         onKeyDown={onKeyDown}
         placeholder="Search"
       />
-      {isLoading && <Spinner animation="grow" />}
       <LocationButton
         onClick={() => {
           if (navigator.geolocation) {
