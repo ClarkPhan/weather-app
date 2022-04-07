@@ -31,7 +31,7 @@ export const weatherSlice = createSlice({
       },
     },
     extendedWeatherData: [],
-    isError: false,
+    error: false,
   },
   reducers: {
     setCity: (state, action) => {
@@ -41,9 +41,12 @@ export const weatherSlice = createSlice({
       state.weatherData = action.payload;
       state.lastUpdated = date.format(new Date(), 'dddd, MMMM DD at h:mm:ss A');
     },
+    setWeatherError: (state, action) => {
+      state.error = action.payload;
+    },
   },
 });
 
-export const { setCity, setWeatherData } = weatherSlice.actions;
+export const { setCity, setWeatherData, setWeatherError } = weatherSlice.actions;
 
 export default weatherSlice.reducer;

@@ -20,7 +20,6 @@ const useRefresh = () => {
           dispatch(setError(res.message));
           return;
         }
-        console.log(res);
         batch(() => {
           dispatch(setCity(city));
           dispatch(setWeatherData(res));

@@ -41,6 +41,12 @@ export const SearchInput = styled.input`
   }
 `;
 
+export const ErrorMsg = styled.p`
+  align-items: center;
+  color: red;
+  margin-left: 1.2rem;
+`;
+
 export const GoogleIcon = styled(Google)`
   width: 23px;
   height: 23px;

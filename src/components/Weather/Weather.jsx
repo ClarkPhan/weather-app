@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 
 import { ReactComponent as HighIcon } from '../../assets/high-icon.svg';
@@ -35,7 +35,6 @@ const Weather = () => {
     useFahrenheit,
     initialLoad,
     lastUpdated,
-    error,
   } = useSelector((state) => ({
     weatherData: state.weather.weatherData,
     useFahrenheit: state.sys.useFahrenheit,
@@ -45,19 +44,15 @@ const Weather = () => {
   }));
   const dispatch = useDispatch();
 
-  useEffect(() => {
-    if (error) {
-      console.log('Cannot load weather for this place');
-    }
-  }, [error]);
-
-  if (!initialLoad) return null;
   const {
     weather,
     main,
     wind,
     name,
   } = weatherData;
+
+  if (!initialLoad || parseInt(weatherData.cod, 10) >= 400 || !weather.length) return null;
+
   const { id, description } = weather[0];
   const {
     temp,
