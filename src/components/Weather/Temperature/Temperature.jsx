@@ -7,7 +7,7 @@ const Temperature = ({ value }) => {
   if (useFahrenheit) {
     return celciusToFahrenheit(value);
   }
-  return value;
+  return Math.round(value);
 };
 
 Temperature.propTypes = {

@@ -70,6 +70,7 @@ const Weather = () => {
             <span>
               <Temperature value={temp} />
               <sup>&deg;</sup>
+              {!useFahrenheit ? 'C' : 'F'}
             </span>
           </div>
         </CurrentWeather>
@@ -80,11 +81,13 @@ const Weather = () => {
               <HighIcon />
               <Temperature value={tempMax} />
               <sup>&deg;</sup>
+              {!useFahrenheit ? 'C' : 'F'}
             </WeatherDegree>
             <WeatherDegree>
               <LowIcon />
               <Temperature value={tempMin} />
               <sup>&deg;</sup>
+              {!useFahrenheit ? 'C' : 'F'}
             </WeatherDegree>
           </HighLowContainer>
           <InfoRow>
@@ -105,7 +108,7 @@ const Weather = () => {
               Wind
             </div>
             <span>
-              {!useFahrenheit ? wind.speed : kmToMile(wind.speed)}
+              {!useFahrenheit ? Math.round(wind.speed) : kmToMile(wind.speed)}
               {' '}
               {!useFahrenheit ? 'kph' : 'mph'}
             </span>

@@ -3,6 +3,9 @@ import styled from 'styled-components';
 export const WeatherContainer = styled.div`
   border-radius: 15px;
   padding: 1.5rem 2rem;
+  @media (max-width: 1024px) {
+    padding: 0rem;
+  }
   display: flex;
   flex-direction: column;
 `;
@@ -17,14 +20,14 @@ export const LastUpdatedSection = styled.h6`
   font-weight: 500;
   font-size: 1.125rem;
   color: ${({ theme }) => theme.lastUpdatedTextColor};
+  @media (max-width: 1024px) {
+    font-size: .6rem;
+  }
 `;
 
 export const CurrentWeatherContainer = styled.div`
   display: flex;
   flex-wrap: wrap;
-  @media (max-width: 800px) {
-    justify-content: flex-start;
-  }
 `;
 
 export const CurrentWeather = styled.div`
@@ -32,7 +35,7 @@ export const CurrentWeather = styled.div`
   flex-direction: column;
   margin: 2rem 5rem;
   width: 25rem;
-  @media (max-width: 800px) {
+  @media (max-width: 1024px) {
     margin: 2rem 0rem;
   }
   h4 {
@@ -49,6 +52,9 @@ export const CurrentWeather = styled.div`
     line-height: 1;
     sup {
       line-height: 0;
+    }
+    @media (max-width: 1024px) {
+      font-size: 6rem;
     }
   }
 `;
