@@ -7,7 +7,6 @@ const rotate = keyframes`
   from {
     transform: rotate(0deg);
   }
-
   to {
     transform: rotate(360deg);
   }
@@ -21,12 +20,11 @@ export const RefreshElement = styled.div`
 export const RefreshButton = styled.button`
   border: none;
   background-color: transparent;
-
 `;
 
 export const RefreshIcon = styled(Refresh)`
   height: 30px;
   width: 30px;
   fill: ${({ theme }) => theme.smallIconColor};
-  animation: ${(props) => (props.isLoading ? css`${rotate} .5s linear infinite;` : null)}
+  animation: ${(props) => (props.isLoading && css`${rotate} .5s linear forwards;`)}
 `;

@@ -22,12 +22,12 @@ const useFetch = () => {
     fetch(query)
       .then((response) => response.json())
       .then((res) => {
-        dispatch(setIsLoading(false));
         if (res.cod >= 400) {
           dispatch(setWeatherError(res.message));
           return;
         }
         batch(() => {
+          dispatch(setIsLoading(false));
           dispatch(setCity(city));
           dispatch(setInitialLoad(true));
           dispatch(setWeatherData(res));
@@ -45,13 +45,12 @@ const useFetch = () => {
     fetch(query)
       .then((response) => response.json())
       .then((res) => {
-        dispatch(setIsLoading(false));
         if (res.cod >= 400) {
           dispatch(setWeatherError(res.message));
           return;
         }
-        console.log(res);
         batch(() => {
+          dispatch(setIsLoading(false));
           dispatch(setCity(res.name));
           dispatch(setInitialLoad(true));
           dispatch(setWeatherData(res));

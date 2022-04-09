@@ -15,12 +15,12 @@ const useRefresh = () => {
     fetch(query)
       .then((response) => response.json())
       .then((res) => {
-        dispatch(setIsLoading(false));
         if (res.cod >= 400) {
           dispatch(setError(res.message));
           return;
         }
         batch(() => {
+          setTimeout(() => { dispatch(setIsLoading(false)); }, 500);
           dispatch(setCity(city));
           dispatch(setWeatherData(res));
         });
