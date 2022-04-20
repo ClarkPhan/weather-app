@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 
 import { ReactComponent as HighIcon } from '../../assets/high-icon.svg';
@@ -12,6 +12,8 @@ import { toggleTemperatureScale } from '../../features/sys/sysSlice';
 import { kmToMile } from '../../utils/unitConversion';
 
 import WeatherIconSwitcher from './WeatherIconSwitcher/WeatherIconSwitcher';
+
+import useRefresh from '../../hooks/useRefresh';
 
 import {
   CurrentWeather,
@@ -30,6 +32,14 @@ import ToggleSwitch from './ToggleSwitch/ToggleSwitch';
 import Refresh from './Refresh/Refresh';
 
 const Weather = () => {
+  const dispatch = useDispatch();
+
+  const { refreshWeatherData } = useRefresh();
+
+  useEffect(() => {
+    refreshWeatherData();
+  }, []);
+
   const {
     weatherData,
     useFahrenheit,
@@ -42,7 +52,6 @@ const Weather = () => {
     error: state.weather.error,
     lastUpdated: state.weather.lastUpdated,
   }));
-  const dispatch = useDispatch();
 
   const {
     weather,
