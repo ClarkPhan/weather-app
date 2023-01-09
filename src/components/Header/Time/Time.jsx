@@ -1,32 +1,33 @@
-import React, { useEffect } from 'react';
-import { useSelector, useDispatch } from 'react-redux';
+import React, { useEffect, useState } from 'react';
+import date from 'date-and-time';
 
 import Title from './styled';
-
-import { tick } from '../../../features/sys/sysSlice';
 import useRefresh from '../../../hooks/useRefresh';
 
+// precompile and reuse pattern for performance
+const pattern = date.compile('h:mm:ss A');
+
 const Time = () => {
-  const dispatch = useDispatch();
+  const [time, setDate] = useState(date.format(new Date(), pattern));
   const { refreshWeatherData } = useRefresh();
-  const now = useSelector((state) => state.sys.now);
-  const refreshClock = () => dispatch(tick());
+  const refreshClock = () => setDate(date.format(new Date(), pattern));
 
   useEffect(() => {
-    setInterval(refreshClock, 1000);
+    const timerId = setInterval(refreshClock, 1000);
+    return () => clearInterval(timerId);
   });
 
   useEffect(() => {
-    const moment = now.split(':');
+    const moment = time.split(':');
     const minutes = parseInt(moment[1], 10);
     const seconds = moment[2].split(' ')[0];
     if (minutes % 5 === 0 && seconds === '00') {
       refreshWeatherData();
     }
-  }, [now]);
+  }, [time]);
 
   return (
-    <Title>{now}</Title>
+    <Title>{time}</Title>
   );
 };
 
